@@ -1,5 +1,6 @@
 'use strict';
 const { TLSSocket } = require('tls');
+const punycode = require('punycode');
 const query = require('./lib/query');
 const authority = require('./lib/authority');
 const absolutePath = require('./lib/absolute-path');
@@ -36,6 +37,7 @@ module.exports = (req) => {
 		if (!port) port = isSecure ? '443' : '80';
 		host = host.toLowerCase();
 		// Fake punycode labels are not valid IDNA labels.
+		// https://tools.ietf.org/html/rfc5890#section-2.3.1
 		if (host.startsWith('xn--') && !punycode.toUnicode(host)) return null;
 	}
 	
