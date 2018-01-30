@@ -2,7 +2,7 @@
 
 ## Another URL parser?
 
-The core [`url`](https://nodejs.org/api/url.html) module is great for parsing generic URLs. Unfortunately, the URL of an HTTP request (formally called the `request-target`, [RFC 7230](https://tools.ietf.org/html/rfc7230#section-5.3)) is *not* just a generic URL. It's a URL that must obey the requirements of the [URL spec (RFC 3986)](https://tools.ietf.org/html/rfc3986) *as well* as the [HTTP spec (RFC 7230)](https://tools.ietf.org/html/rfc7230).
+The core [`url`](https://nodejs.org/api/url.html) module is great for parsing generic URLs. Unfortunately, the URL of an HTTP request (formally called the [`request-target`](https://tools.ietf.org/html/rfc7230#section-5.3)), is *not* just a generic URL. It's a URL that must obey the requirements of the [URL spec (RFC 3986)](https://tools.ietf.org/html/rfc3986) *as well* as the [HTTP spec (RFC 7230)](https://tools.ietf.org/html/rfc7230).
 
 ## The problems
 
