@@ -1,7 +1,10 @@
 # http-url
-The core [`url`](https://nodejs.org/api/url.html) module is great for parsing generic urls. Unfortunately, the url of an http request (formally called the `request-target`, [RFC 7230](https://tools.ietf.org/html/rfc7230#section-5.3)) is *not* just a generic url. It's a url that must obey the requirements of the url spec ([RFC 3986](https://tools.ietf.org/html/rfc3986)) *as well* as the http spec ([RFC 7230](https://tools.ietf.org/html/rfc7230)).
 
-## The problems with existing parsers
+## Another URL parser?
+
+The core [`url`](https://nodejs.org/api/url.html) module is great for parsing generic URLs. Unfortunately, the URL of an HTTP request (formally called the `request-target`, [RFC 7230](https://tools.ietf.org/html/rfc7230#section-5.3)) is *not* just a generic URL. It's a URL that must obey the requirements of the [URL spec (RFC 3986)](https://tools.ietf.org/html/rfc3986) *as well* as the [HTTP spec (RFC 7230)](https://tools.ietf.org/html/rfc7230).
+
+## The problems
 
 The core [`http`](https://nodejs.org/api/http.html) module does not validate or sanitize `req.url`. The legacy [`url.parse()`](https://nodejs.org/api/url.html#url_legacy_url_api) function also allows illegal characters to appear.
 
@@ -10,7 +13,7 @@ The newer [`url.URL()`](https://nodejs.org/api/url.html#url_class_url) construct
 
 This means a malformed url should be treated as a violation of the http protocol. It's not something that should be accepted or autocorrected, and it's not something that higher-level code should ever have to worry about.
 
-## It's not just about being correct
+## The severity
 
 It's tempting to use the [Robustness Principle](https://en.wikipedia.org/wiki/Robustness_principle) as an argument for using the `url.URL` constructor here. Normally, it can be acceptable to diverge from the spec if the result is harmless and beneficial. However, this is not one of those cases. The strictness of url correctness exists in the spec explicity for security reasons, which should be non-negotiable—especially for a large and respected platform such as Node.js. That's why `http-url` exists.
 
