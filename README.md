@@ -6,7 +6,7 @@ The core [`url`](https://nodejs.org/api/url.html) module is great for parsing ge
 
 ## The problems
 
-The core [`http`](https://nodejs.org/api/http.html) module does not validate or sanitize `req.url`, even though the [HTTP RFC](https://tools.ietf.org/html/rfc7230) specifically restricts the URL to certain characters.
+The core [`http`](https://nodejs.org/api/http.html) module does not validate or sanitize `req.url`.
 
 The legacy [`url.parse()`](https://nodejs.org/api/url.html#url_legacy_url_api) function also allows illegal characters to appear.
 
