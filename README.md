@@ -29,7 +29,7 @@ The function takes a *request object* as input (not a URL string) because the ht
 
 If the request is valid, it will return an object with five properties: `protocol`, `hostname`, `port`, `pathname`, and `search`. The first three properties are either non-empty strings or `null`, and are mutually dependant. The `path` property is always a non-empty string, and the `search` property is always a possibly empty string.
 
-If the first three properties are not `null`, it means the request was in [`absolute-form`](https://tools.ietf.org/html/rfc7230#section-5.3.2) or a valid non-empty `Host` header was provided.
+If the first three properties are not `null`, it means the request was in [`absolute-form`](https://tools.ietf.org/html/rfc7230#section-5.3.2) or a valid non-empty [Host header](https://tools.ietf.org/html/rfc7230#section-5.4) was provided.
 
 ```js
 const result = parse(req);
