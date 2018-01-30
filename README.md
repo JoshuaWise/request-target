@@ -25,13 +25,13 @@ Because of backwards compatibility, it's unlikely that the logic expressed in `p
 
 ## Unexpected benefits
 
-This goal of `parse-http-url` was not to create a fast parser, but it turns out this implementation can be between 3–14x faster than the general-purpose parsers in core.
+This goal of `parse-http-url` was not to create a fast parser, but it turns out this implementation can be between 2–9x faster than the general-purpose parsers in core.
 
 ```
 $ npm run benchmark
-legacy url.parse() x 255,610 ops/sec ±3.09% (19 runs sampled)
-whatwg new URL() x 53,583 ops/sec ±1.67% (44 runs sampled)
-parse-http-url parseRequest() x 755,672 ops/sec ±5.05% (10 runs sampled)
+legacy url.parse() x 285,869 ops/sec ±3.70% (20 runs sampled)
+whatwg new URL() x 54,509 ops/sec ±0.99% (51 runs sampled)
+parse-http-url parseRequest() x 500,782 ops/sec ±4.01% (14 runs sampled)
 ```
 
 > Run the benchmark yourself with `npm run benchmark`.
