@@ -21,7 +21,7 @@ suite.add('whatwg new URL()', {
 	fn() { return new whatwg(requests[--iteration].url, 'http://my.implied.origin'); }
 });
 
-suite.add('http-url parseRequest()', {
+suite.add('parse-http-url parseRequest()', {
 	setup,
 	fn() { return parseRequest(requests[--iteration]); }
 });
