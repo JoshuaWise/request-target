@@ -17,7 +17,7 @@ This means a malformed url should be treated as a violation of the http protocol
 
 ## The severity
 
-It's tempting to use the [Robustness Principle](https://en.wikipedia.org/wiki/Robustness_principle) as an argument for using the `url.URL` constructor here. Normally, it can be acceptable to diverge from the spec if the result is harmless and beneficial. However, this is not one of those cases. The strictness of url correctness exists in the spec explicity for security reasons, which should be non-negotiable—especially for a large and respected platform such as Node.js. That's why `http-url` exists.
+It's tempting to use the [Robustness Principle](https://en.wikipedia.org/wiki/Robustness_principle) as an argument for using the `url.URL` constructor here. Normally, it can be acceptable to diverge from the spec if the result is harmless and beneficial. However, this is not one of those cases. The strictness of url correctness exists in the spec explicity for security reasons, which should be non-negotiable—especially for a large and respected platform such as Node.js. This is why I created `http-url`.
 
 ## Adoption into core
 
