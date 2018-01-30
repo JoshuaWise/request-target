@@ -25,7 +25,7 @@ Because of backwards compatibility, it's unlikely that the logic expressed in `h
 
 ## Unexpected benefits
 
-This goal of `http-url` was not to create a faster parser, but it turns out this implementation can be between 3–14x faster than the general-purpose parsers in core.
+This goal of `http-url` was not to create a fast parser, but it turns out this implementation can be between 3–14x faster than the general-purpose parsers in core.
 
 ```
 $ npm run benchmark
