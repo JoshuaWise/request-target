@@ -1,6 +1,6 @@
 {
   "name": "parse-http-url",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A url parser for http requests, compliant with RFC 7230",
   "main": "index.js",
   "dependencies": {
