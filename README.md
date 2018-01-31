@@ -1,4 +1,4 @@
-# parse-http-url
+# parse-http-url [![Build Status](https://travis-ci.org/JoshuaWise/parse-http-url.svg?branch=master)](https://travis-ci.org/JoshuaWise/parse-http-url)
 
 ## Another URL parser?
 
