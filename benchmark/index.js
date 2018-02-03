@@ -1,32 +1,20 @@
 'use strict';
-const fs = require('fs');
-const path = require('path');
-const suite = new (require('benchmark').Suite);
+const nodemark = require('nodemark');
+const fake = require('./fake');
 
 const legacy = require('url').parse;
 const whatwg = require('url').URL;
 const parseRequest = require('../.');
 
-const setup = new Function('\'use strict\'; const exports = {};\n'
-	+ fs.readFileSync(path.join(__dirname, 'fake.js')) + ';\n'
-	+ fs.readFileSync(path.join(__dirname, 'setup.js')));
-
-suite.add('legacy url.parse()', {
-	setup,
-	fn() { return legacy(requests[--iteration].url); },
+let request;
+const setup = () => request = ({
+	url: fake.choose(0.8) ? fake.path() : fake.url(),
+	headers: { host: fake.host() },
+	method: fake.method(),
 });
 
-suite.add('whatwg new URL()', {
-	setup,
-	fn() { return new whatwg(requests[--iteration].url, 'http://my.implied.origin'); }
-});
+const benchmark = (name, fn) => console.log(`${name} x ${nodemark(fn, setup)}`);
 
-suite.add('parse-http-url parseRequest()', {
-	setup,
-	fn() { return parseRequest(requests[--iteration]); }
-});
-
-suite.on('cycle', (event) => {
-	console.log(String(event.target));
-});
-suite.run();
+benchmark('legacy url.parse()', () => legacy(request.url));
+benchmark('whatwg new URL()', () => new whatwg(request.url, 'http://my.implied.origin'));
+benchmark('parse-http-url', () => parseRequest(request));

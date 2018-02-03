@@ -21,7 +21,7 @@ It's tempting to use the [Robustness Principle](https://en.wikipedia.org/wiki/Ro
 
 ## Adoption into core
 
-Because of backwards compatibility, it's unlikely that the logic expressed in `parse-http-url` will be incorporated into the core [`http`](https://nodejs.org/api/http.html) module. My recommendation is to either incorporate it into [`http2`](https://nodejs.org/api/http2.html), which is still considered experimental, or as an alternative function in the core [`url`](https://nodejs.org/api/url.html) module. There are many paths forward, but subjecting millions of unsuspecting users to potential security vulnerabilities is not an acceptable practice.
+Because of backwards compatibility, it's unlikely that the logic expressed in `parse-http-url` will be incorporated into the core [`http`](https://nodejs.org/api/http.html) module. My recommendation is to either incorporate it into [`http2`](https://nodejs.org/api/http2.html), which is still considered experimental, or as an alternative function in the core [`url`](https://nodejs.org/api/url.html) module. These are just a few examples, but there are many paths forward.
 
 ## How to use
 
@@ -43,13 +43,13 @@ if (result) {
 
 ## Unexpected benefits
 
-This goal of `parse-http-url` was not to create a fast parser, but it turns out this implementation can be between 2–9x faster than the general-purpose parsers in core.
+This goal of `parse-http-url` was not to create a fast parser, but it turns out this implementation can be between 1.5–9x faster than the general-purpose parsers in core.
 
 ```
 $ npm run benchmark
-legacy url.parse() x 285,869 ops/sec ±3.70% (20 runs sampled)
-whatwg new URL() x 54,509 ops/sec ±0.99% (51 runs sampled)
-parse-http-url parseRequest() x 500,782 ops/sec ±4.01% (14 runs sampled)
+legacy url.parse() x 371,681 ops/sec ±0.88% (297996 samples)
+whatwg new URL() x 58,766 ops/sec ±0.3% (118234 samples)
+parse-http-url x 552,748 ops/sec ±0.54% (344809 samples)
 ```
 
 > Run the benchmark yourself with `npm run benchmark`.
