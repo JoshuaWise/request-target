@@ -16,8 +16,8 @@ class FakeRequest {
 		this.headers.host = str;
 		return this;
 	}
-	secure(bool) {
-		this.socket = bool ? Object.create(TLSSocket.prototype) : {};
+	secure() {
+		this.socket = Object.create(TLSSocket.prototype);
 		return this;
 	}
 }

@@ -17,7 +17,7 @@ describe('origin-form', function () {
 			.to.deep.equal(expected);
 	});
 	it('should respect the scheme', function () {
-		expect(parse(req('http://some.host/path/to/resource?foo=1&bar=2').secure(true)))
+		expect(parse(req('http://some.host/path/to/resource?foo=1&bar=2').secure()))
 			.to.deep.equal(expected);
 		expect(parse(req('https://some.host/path/to/resource?foo=1&bar=2')))
 			.to.deep.equal({ ...expected, protocol: 'https:', port: '443' });
@@ -102,6 +102,10 @@ describe('origin-form', function () {
 		expect(parse(req('http://some.host/path/to//resource?foo=1&bar=2')))
 			.to.equal(null);
 		expect(parse(req('http://some.host/path/to/re{source?foo=1&bar=2')))
+			.to.equal(null);
+		expect(parse(req('http://some.host*?foo=1&bar=2')))
+			.to.equal(null);
+		expect(parse(req('http://some.host*')))
 			.to.equal(null);
 	});
 	it('should reject invalid searches', function () {
