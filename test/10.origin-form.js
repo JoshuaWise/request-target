@@ -124,8 +124,4 @@ describe('origin-form', function () {
 		expect(parse(req(`http://some${'.host'.repeat(50)}x./path/to/resource?foo=1&bar=2`)))
 			.to.equal(null);
 	});
-	it('should reject fake punycode hosts', function () {
-		expect(parse(req('http://xn--some.host/path/to/resource?foo=1&bar=2')))
-			.to.equal(null);
-	});
 });

@@ -108,8 +108,4 @@ describe('absolute-form', function () {
 		expect(parse(req(`/path/to/resource?foo=1&bar=2`).host(`some${'.host'.repeat(50)}x.`)))
 			.to.equal(null);
 	});
-	it('should reject fake punycode hosts', function () {
-		expect(parse(req('/path/to/resource?foo=1&bar=2').host('xn--some.host')))
-			.to.equal(null);
-	});
 });

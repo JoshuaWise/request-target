@@ -1,6 +1,5 @@
 'use strict';
 const { TLSSocket } = require('tls');
-const punycode = require('punycode');
 const requestTarget = require('./lib/request-target');
 const hostHeader = require('./lib/host-header');
 
@@ -27,9 +26,6 @@ module.exports = (req) => {
 		// DNS names have a maximum length of 255, including the root domain.
 		if (host.length > (host.charCodeAt(host.length - 1) === 46 ? 255 : 254)) return null;
 		host = host.toLowerCase();
-		// Fake punycode labels are not valid IDNA labels.
-		// https://tools.ietf.org/html/rfc5890#section-2.3.1
-		if (host.startsWith('xn--') && !punycode.toUnicode(host)) return null;
 		if (port) {
 			const num = +port;
 			if (num > 65535) return null; // Invalid port number
