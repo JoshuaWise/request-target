@@ -23,7 +23,7 @@ const query = () => choose(0.2) ? '' : '?' + gen(pchar, rand(2, 64));
 
 // Normally, v8 uses fancy tricks to avoid concatenation. This forces v8 to
 // store the string as a single buffer, as it would be coming over the wire.
-const serialize = (str) => { Number(str); return str; };
+const serialize = str => Buffer.from(str).toString();
 
 exports.choose = choose;
 exports.path = () => serialize(path() + query());

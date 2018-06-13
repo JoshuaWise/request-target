@@ -17,4 +17,4 @@ const benchmark = (name, fn) => console.log(`${name} x ${nodemark(fn, setup)}`);
 
 benchmark('legacy url.parse()', () => legacy(request.url));
 benchmark('whatwg new URL()', () => new whatwg(request.url, 'http://my.implied.origin'));
-benchmark('parse-http-url', () => parseRequest(request));
+benchmark('request-target', () => parseRequest(request));

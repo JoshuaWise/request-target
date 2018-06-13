@@ -1,4 +1,4 @@
-# parse-http-url [![Build Status](https://travis-ci.org/JoshuaWise/parse-http-url.svg?branch=master)](https://travis-ci.org/JoshuaWise/parse-http-url)
+# request-target [![Build Status](https://travis-ci.org/JoshuaWise/request-target.svg?branch=master)](https://travis-ci.org/JoshuaWise/request-target)
 
 ## Another URL parser?
 
@@ -15,13 +15,9 @@ The newer [`url.URL()`](https://nodejs.org/api/url.html#url_class_url) construct
 
 This means a malformed URL should be treated as a violation of the http protocol. It's not something that should be accepted or autocorrected, and it's not something that higher-level code should ever have to worry about.
 
-## The severity
-
-It's tempting to use the [Robustness Principle](https://en.wikipedia.org/wiki/Robustness_principle) as an argument for using the `url.URL` constructor here. Normally, it can be acceptable to diverge from the spec if the result is harmless and beneficial. However, this is not one of those cases. The strictness of URL correctness exists in the spec explicity for security reasons, which should be non-negotiable—especially for a large and respected platform such as Node.js.
-
 ## Adoption into core
 
-Because of backwards compatibility, it's unlikely that the logic expressed in `parse-http-url` will be incorporated into the core [`http`](https://nodejs.org/api/http.html) module. My recommendation is to either incorporate it into [`http2`](https://nodejs.org/api/http2.html), which is still considered experimental, or as an alternative function in the core [`url`](https://nodejs.org/api/url.html) module. These are just a few examples, but there are many paths forward.
+Because of backwards compatibility, it's unlikely that the logic expressed in `request-target` will be incorporated into the core [`http`](https://nodejs.org/api/http.html) module. My recommendation is to incorporate it as an alternative function in the core [`url`](https://nodejs.org/api/url.html) module. If that never happens, just make sure you're using a package like this when parsing `req.url`.
 
 ## How to use
 
@@ -43,13 +39,13 @@ if (result) {
 
 ## Unexpected benefits
 
-This goal of `parse-http-url` was not to create a fast parser, but it turns out this implementation can be between 1.5–9x faster than the general-purpose parsers in core.
+This goal of `request-target` was not to create a fast parser, but it turns out this implementation can be between 1.5–9x faster than the general-purpose parsers in core.
 
 ```
 $ npm run benchmark
 legacy url.parse() x 371,681 ops/sec ±0.88% (297996 samples)
 whatwg new URL() x 58,766 ops/sec ±0.3% (118234 samples)
-parse-http-url x 552,748 ops/sec ±0.54% (344809 samples)
+request-target x 552,748 ops/sec ±0.54% (344809 samples)
 ```
 
 > Run the benchmark yourself with `npm run benchmark`.
