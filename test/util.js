@@ -8,8 +8,8 @@ class FakeRequest {
 		this.headers = {};
 		this.socket = {};
 	}
-	method(str) {
-		this.method = str;
+	options() {
+		this.method = 'OPTIONS';
 		return this;
 	}
 	host(str) {

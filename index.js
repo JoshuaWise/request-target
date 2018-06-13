@@ -10,7 +10,6 @@ module.exports = (req) => {
 	if (!target) return null; // Invalid url
 	
 	let [,scheme = null, host = null, port = null, path, query = ''] = target;
-	const isSecure = req.socket instanceof TLSSocket;
 	
 	if (scheme) {
 		scheme = scheme.toLowerCase();
@@ -20,7 +19,7 @@ module.exports = (req) => {
 		if (!hostport) return null; // Invalid Host header
 		if (hostport[1]) {
 			[,host, port = null] = hostport;
-			scheme = isSecure ? 'https:' : 'http:';
+			scheme = req.socket instanceof TLSSocket ? 'https:' : 'http:';
 		}
 	}
 	
@@ -36,7 +35,7 @@ module.exports = (req) => {
 			if (num > 65535) return null; // Invalid port number
 			if (port.charCodeAt(0) === 48) port = '' + num; // Remove leading zeros
 		} else {
-			port = isSecure ? '443' : '80';
+			port = scheme.length === 6 ? '443' : '80';
 		}
 	}
 	
