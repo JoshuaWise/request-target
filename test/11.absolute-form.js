@@ -32,12 +32,6 @@ describe('absolute-form', function () {
 		expect(parse(req('/path/to/resource?foo=1&bar=2').host('')))
 			.to.deep.equal({ ...expected, protocol: null, hostname: null, port: null });
 	});
-	it('should allow the asterisk path', function () {
-		expect(parse(req('*').host('some.host')))
-			.to.deep.equal({ ...expected, pathname: '*', search: '' });
-		expect(parse(req('*').host('some.host').options()))
-			.to.deep.equal({ ...expected, pathname: '*', search: '' });
-	});
 	it('should lowercase the host', function () {
 		expect(parse(req('/path/to/resource?foo=1&bar=2').host('sOme.hoSt')))
 			.to.deep.equal(expected);
@@ -94,8 +88,6 @@ describe('absolute-form', function () {
 		expect(parse(req('/path/to/re{source?foo=1&bar=2').host('some.host')))
 			.to.equal(null);
 		expect(parse(req('?foo=1&bar=2').host('some.host')))
-			.to.equal(null);
-		expect(parse(req('*?foo=1&bar=2').host('some.host')))
 			.to.equal(null);
 		expect(parse(req('').host('some.host')))
 			.to.equal(null);
