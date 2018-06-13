@@ -13,6 +13,10 @@ const expected = {
 
 describe('asterisk-form', function () {
 	it('should parse valid asterisk-form request-targets', function () {
+		// Note: the spec does not clearly state what to do when asterisk-form
+		// is used with a method other than OPTIONS. It simply says it is "only
+		// used for a server-wide OPTIONS request".
+		// https://tools.ietf.org/html/rfc7230#section-5.3.4
 		expect(parse(req('*').host('some.host')))
 			.to.deep.equal(expected);
 		expect(parse(req('*').host('some.host').options()))
