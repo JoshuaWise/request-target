@@ -39,7 +39,7 @@ if (result) {
 
 ## Unexpected benefits
 
-This goal of `request-target` was not to create a fast parser, but it turns out this implementation can be between 1.5–9x faster than the general-purpose parsers in core.
+The goal of `request-target` was not to create a fast parser, but it turns out this implementation can be between 1.5–9x faster than the general-purpose parsers in core.
 
 ```
 $ npm run benchmark
