@@ -23,7 +23,7 @@ Because of backwards compatibility, it's unlikely that the logic expressed in `r
 
 The function takes a *request object* as input (not a URL string) because the http spec requires inspection of `req.method` and `req.headers.host` in order to properly interpret the URL of a request. If the function returns `null`, the request should not be processed further—either destroy the connection or respond with `Bad Request`.
 
-If the request is valid, it will return an object with five properties: `protocol`, `hostname`, `port`, `pathname`, and `search`. The first three properties are either non-empty strings or `null`, and are mutually dependant. The `path` property is always a non-empty string, and the `search` property is always a possibly empty string.
+If the request is valid, it will return an object with five properties: `protocol`, `hostname`, `port`, `pathname`, and `search`. The first three properties are either non-empty strings or `null`, and are mutually dependant. The `pathname` property is always a non-empty string, and the `search` property is always a possibly empty string.
 
 If the first three properties are not `null`, it means the request was in [`absolute-form`](https://tools.ietf.org/html/rfc7230#section-5.3.2) or a valid non-empty [Host header](https://tools.ietf.org/html/rfc7230#section-5.4) was provided.
 
