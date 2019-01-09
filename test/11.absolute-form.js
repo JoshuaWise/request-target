@@ -47,6 +47,8 @@ describe('absolute-form', function () {
 	it('should accept subdomains starting with numbers', function () {
 		expect(parse(req('/path/to/resource?foo=1&bar=2').host('012.345.g0')))
 			.to.deep.equal({ ...expected, hostname: '012.345.g0' });
+		expect(parse(req('/path/to/resource?foo=1&bar=2').host('012.345.0g')))
+			.to.deep.equal({ ...expected, hostname: '012.345.0g' });
 	});
 	it('should accept IPv4 addresses', function () {
 		expect(parse(req('/path/to/resource?foo=1&bar=2').host('111.22.0.255')))
@@ -63,7 +65,9 @@ describe('absolute-form', function () {
 			.to.equal(null);
 		expect(parse(req('/path/to/resource?foo=1&bar=2').host('some..host')))
 			.to.equal(null);
-		expect(parse(req('/path/to/resource?foo=1&bar=2').host('some.1host')))
+		expect(parse(req('/path/to/resource?foo=1&bar=2').host('some.999')))
+			.to.equal(null);
+		expect(parse(req('/path/to/resource?foo=1&bar=2').host('some.1-2')))
 			.to.equal(null);
 		expect(parse(req('/path/to/resource?foo=1&bar=2').host('111.22.0.256')))
 			.to.equal(null);
